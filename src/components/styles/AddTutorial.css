@@ -1,0 +1,83 @@
+
+.input{
+    display:flex;
+    justify-content:center;   
+    font-size:18px;
+    margin-top:15px;
+}
+.title{
+    display:flex;
+     margin-top:25px;
+     justify-content:center;  
+    font-size:18px
+
+}
+.form-background{
+    background-color:rgb(228, 225, 225);
+    border: .5px solid #ccc;
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   margin: 50px 0px 0px 350px;
+   width:50%;
+   min-height:70%
+
+}
+
+.form-style{
+    display:flex;
+  justify-content:center;
+  align-items:center;
+
+   
+}
+.submit-button{
+    display:flex;
+    justify-content:center;
+    margin: 7px 0px 9px 0px;
+    }
+   
+#submit{  
+padding:7px 30px;
+font-size:18px;
+margin: 20px 0 20px 0
+
+}
+
+
+.login-error{
+    text-align:center;
+    margin:0 auto;
+    margin-top:20px;
+    font-style:italic;
+    color:red;
+    font-size:25px
+}
+.form-control{   
+    text-align:center;
+    font-size:18px
+
+}
+.error-message{
+    font-style:italic;
+    font-size:10px;
+    color:red;
+   margin-left:65px;
+   margin-top:none
+}
+    
+.form-group{
+   
+    margin-bottom:none;
+    font-size:25px
+}
+
+.tutorial-form{
+    text-align:center;
+    margin-top:3px;
+    font-style:italic;
+    font-weight:bold;
+    font-size:27px;
+    margin-bottom:10px
+
+}
