@@ -53,6 +53,7 @@ class TutorialList extends Component{
             
             <div className="list-row ">
                 <div className="col-md-6 mx-3">
+                    <h2 className="fs-4 mt-3 align-self-center mx-auto text-center">Litle Saint International College Offa. Kwara state.</h2>
                     <div className="input-group mx-5 my-5">
                         <input type="text" className="form-control  text-center" placeholder="search by title" 
                         value={searchTitle} onChange={this.onSearchTitle}/>
@@ -67,7 +68,7 @@ class TutorialList extends Component{
    </div>
    <div className="col-md-7">
   {auth ? <AddButton/> : <h6> Login to add tutorial</h6>}
- <h4 className="m-3 fs-3 text-center">{tutorials && tutorials.length > 0 ? "Tutorials List" :"Please Login To Add Tutorial "}</h4>
+ <h4 className="m-3 fs-3 text-center">{tutorials && tutorials.length > 0 ? "Tutorial List" :"No Tutorial Found "}</h4>
  <ul className="list-group">
  {tutorials && tutorials.length > 0 && tutorials.map((tutorial, index)=>(
   <li className={"list-group-item" + (index ===currentIndex ? "active" :"") } onClick={()=>this.setActiveTutorial(tutorial, index)} key={tutorial.id}>
@@ -109,7 +110,7 @@ class TutorialList extends Component{
 
                     </div>) :(<div>
                         <br/>
-                        <h5 className=" mt-3 text-start">{tutorials && tutorials.length > 0 && <p>Please click on tutorial</p>}</h5>
+                        <h5 className=" mt-3 text-start">{tutorials && tutorials.length > 0 && <p>Please click on a tutorial</p>}</h5>
                        </div> )}
                     
                 </div>
