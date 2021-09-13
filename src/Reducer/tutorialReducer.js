@@ -1,5 +1,5 @@
 import {CREATE_TUTORIAL,CREATE_TUTORIAL_FAIL, RETRIEVE_TUTORIAL, RETRIEVE_TUTORIAL_FAIL, RETRIEVE_ONE_TUTORIAL, RETRIEVE_ONE_TUTORIAL_FAIL,UPDATE_TUTORIAL,
-UPDATE_TUTORIAL_FAIL, DELETE_TUTORIAL,DELETE_TUTORIAL_FAIL, DELETE_ALL_TUTORIAL} from '../actions/type';
+UPDATE_TUTORIAL_FAIL, DELETE_TUTORIAL,DELETE_TUTORIAL_FAIL, DELETE_ALL_TUTORIAL, DELETE_ERROR_MESSAGE} from '../actions/type';
  
 const initialState={
     error:{},
@@ -53,14 +53,16 @@ export const tutorialReducer=(state=initialState, action)=>{
                         return error;
 
                     case DELETE_TUTORIAL:
-                        return  state.payload.filter(tutorial=>tutorial.id !==payload.id
-                        )
+                        return state.payload.filter(item=>item.id !== payload)
+                        
                         case DELETE_TUTORIAL_FAIL:
                             return error;
 
-                        case DELETE_ALL_TUTORIAL:
-                            return []
-            
+                            case DELETE_ERROR_MESSAGE:
+                                return{
+                                    error:{}
+                                }
+
             default:
                 return state;
     }

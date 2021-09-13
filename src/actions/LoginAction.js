@@ -3,14 +3,11 @@ import {SET_CURRENT_USER, SET_CURRENT_USER_FAIL, DELETE_ERROR_MESSAGE} from './t
 import TutorialDataService from '../services/service';
 import jwt from 'jsonwebtoken';
 import toastr from 'toastr'
-require('dotenv').config();
-
 
 
 export const setCurrentUser=(user)=>({
     type:SET_CURRENT_USER,
-        user
-    
+        user   
 })
 
 export const setCurrentUserFail=(error)=>({
@@ -29,9 +26,9 @@ export const loginUser=(user)=> (dispatch)=>{
  return TutorialDataService.login(user)
  .then(res=>{
     const {message}= res.data;
-    const {token}= res.data;
-     localStorage.setItem(`${process.env.SECRET_KEY}`, token);
-    toastr.success(message);
+    const {token}= res.data.user;
+     localStorage.setItem("access-token", token);
+     toastr.success(message);
      dispatch(setCurrentUser(jwt.decode(token)));
      return true
             

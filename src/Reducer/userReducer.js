@@ -1,35 +1,29 @@
-import {CREATE_USER, CREATE_USER_FAIL,SET_CURRENT_USER, SET_CURRENT_USER_FAIL, LOGOUT_USER, DELETE_ERROR_MESSAGE} from '../actions/type';
+import {SET_CURRENT_USER, SET_CURRENT_USER_FAIL, SIGN_UP_ERROR, LOGOUT_USER, DELETE_ERROR_MESSAGE} from '../actions/type';
 
 const initialState={
     isAuthenticated:false,
-    data:{},
     user:{},
     error:{}
 };
 
 const userReducer=(state=initialState, action)=>{
-    const{type, user, data, error} =action
+    const{type, user, error} =action
     switch(type){
-        case CREATE_USER:
+        case SET_CURRENT_USER:
             return {
                 ...state,
-                   data
+                isAuthenticated:true,
+                   user
             }
-            case CREATE_USER_FAIL:
+            
+                case SET_CURRENT_USER_FAIL:
                 return{
                     ...state,
-                    data:{},
+                    isAuthenticated:false,
                     error
 
                 }
-                case SET_CURRENT_USER:
-                return{
-                    ...state,
-                    isAuthenticated:true,
-                    user                 
-
-                }
-                case SET_CURRENT_USER_FAIL:
+                case SIGN_UP_ERROR:
                 return{
                     ...state,
                     isAuthenticated:false,

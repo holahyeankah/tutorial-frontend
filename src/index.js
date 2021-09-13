@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
-import store from "./reducer/store"
+import store from "./Reducer/store"
 import configureStore from './components/common/ConfigureStore';
 
 configureStore(store)

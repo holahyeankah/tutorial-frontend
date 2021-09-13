@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {updateTutorial, deleteTutorial, findOneTutorial} from '../actions/tutorial';
+import {updateTutorial, removeTutorial, findOneTutorial} from '../actions/tutorial';
 import {connect} from "react-redux";
 import TextField from './common/TextField'
 import './styles/EditTutorial.css';
@@ -17,19 +17,15 @@ class Edit extends Component{
                 published:false,
                 isLoading:true,
                 message:'',
-                errorMsg:'',
-                
-        
+                errorMsg:''      
     }
     }
 
-    componentDidMount=()=>{
+    componentDidMount(){
     const id=this.props.match.params.id
     this.getTutorial(id)
-      this.setState({id, isLoading:false})
-    
-    
-       
+    this.setState({id, isLoading:false})
+           
     }
 
     handleChange=(e)=>{
@@ -57,7 +53,6 @@ class Edit extends Component{
         
     }
 
-
     updateContent=()=>{
         const {id, published, title, description}=this.state;
         const data= { published, title, description}  
@@ -69,9 +64,9 @@ class Edit extends Component{
         })
 
     }
-    removeTutorial=()=>{
-        const{deleteTutorial, history}=this.props;
-       deleteTutorial(this.state.id)
+    deleteTutorial=()=>{
+        const{removeTutorial, history}=this.props;
+       removeTutorial(this.state.id)
         .then(()=>{
          history.push("/tutorials")
         })
@@ -80,19 +75,17 @@ class Edit extends Component{
         })
 
     }
-  
-
-    
-    
 
     render(){
-        const {title, description, published,isLoading}=this.state;
+        const {title, description, published}=this.state;
         const{auth}=this.props;
+
+        if(!(title || description)){
+            return <Loading/>
+        }
     
         return(
             <div className="form-background align-self-center text-center mx-auto mt-5">
-                               
-                {!isLoading  ?(
                 <div className="edit-form">
                     <h4 className="header">Edit form</h4>
                     <form>
@@ -109,13 +102,14 @@ class Edit extends Component{
                         </div>
                         <div className="form-group">
                             <label className="heading-style"htmlFor="description">Description </label>
-                            <TextField
+                            <textarea
                              type="text"
                              className="form-control" 
                              id="description" 
                               value={description} 
                               onChange={this.handleChange}
-                               field="description"/>
+                               name="description">
+                                </textarea>
                                 
                         </div>
                         <div className="status">
@@ -138,16 +132,12 @@ class Edit extends Component{
                         </button>
                     </div>)}
                     
-                    <button disabled={!auth} className="btn btn-sm btn-danger"  onClick={this.removeTutorial}> Delete </button>
+                    <button disabled={!auth} className="btn btn-sm btn-danger"  onClick={this.deleteTutorial}> Delete </button>
                     
                     <button disabled={!auth} className="btn btn-sm btn-success" onClick={this.updateContent}> Update </button> 
                     </div>
                  
-                </div>): (
-                <div>
-<br/>
-<p>Please click on tutorial</p>
-                </div>)}
+                </div>
 
             </div>
     
@@ -157,4 +147,4 @@ class Edit extends Component{
 const mapStateToProps=(state)=>({
     auth:state.auth.isAuthenticated
 })
-export default connect (mapStateToProps, {updateTutorial, deleteTutorial, findOneTutorial})(Edit)
+export default connect (mapStateToProps, {updateTutorial, removeTutorial, findOneTutorial})(Edit)

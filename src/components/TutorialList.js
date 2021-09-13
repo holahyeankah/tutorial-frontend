@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
 import AddButton from './AddButton';
 import { retrieveTutorial, findByTitle } from '../actions/tutorial'
+import Loading from  './common/Loading'
 
 class TutorialList extends Component{
     constructor(props){
@@ -53,7 +54,6 @@ class TutorialList extends Component{
             
             <div className="list-row ">
                 <div className="col-md-6 mx-3">
-                    <h2 className="fs-4 mt-3 align-self-center mx-auto text-center">Litle Saint International College Offa. Kwara state.</h2>
                     <div className="input-group mx-5 my-5">
                         <input type="text" className="form-control  text-center" placeholder="search by title" 
                         value={searchTitle} onChange={this.onSearchTitle}/>
@@ -67,13 +67,15 @@ class TutorialList extends Component{
   </div>
    </div>
    <div className="col-md-7">
-  {auth ? <AddButton/> : <h6> Login to add tutorial</h6>}
- <h4 className="m-3 fs-3 text-center">{tutorials && tutorials.length > 0 ? "Tutorial List" :"No Tutorial Found "}</h4>
+
+  { <AddButton auth={auth}/>}
+  
+ <h4 className="m-3 mt fs-3 text-center">{tutorials && tutorials.length > 0 ? "Tutorial List" :"Fetching Tutorial List... "}</h4>
  <ul className="list-group">
- {tutorials && tutorials.length > 0 && tutorials.map((tutorial, index)=>(
+ {tutorials && tutorials.length > 0 ? tutorials.map((tutorial, index)=>(
   <li className={"list-group-item" + (index ===currentIndex ? "active" :"") } onClick={()=>this.setActiveTutorial(tutorial, index)} key={tutorial.id}>
                    <h5 > {tutorial.title}</h5> 
-                    </li>    ))}
+                    </li>    )) : <div><Loading/></div>}
         </ul>
         </div>
          <div className="col-md-6">
@@ -100,7 +102,7 @@ class TutorialList extends Component{
                    {currentTutorial.published ? "Published" : "Pending"}
                   </div>
                         
-                    <Link disabled={!auth} to={`/tutorial/${currentTutorial.id}`} className="badge badge-warning">
+                    <Link  to={`/tutorial/${currentTutorial.id}`} className="badge badge-warning">
                 
                       <button  className=" m-2 btn btn-md btn-warning"> 
                        Edit 

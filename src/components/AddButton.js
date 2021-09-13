@@ -1,16 +1,17 @@
 import {Link} from 'react-router-dom';
 
-const AddButton=()=>{
+const AddButton=({auth})=>{
     return(
         <div className="col-md-6">
-            <Link to ={'/add'}>
-            <button className="btn btn-outline-secondary" >
+            {auth ? <Link to ={'/add'}>
+            <button disabled={!auth} className="btn btn-outline-secondary" >
 Add tutorial
             </button>
-            </Link>
+            </Link>: null}
 
         </div>
     )
 }
+
 
 export default AddButton

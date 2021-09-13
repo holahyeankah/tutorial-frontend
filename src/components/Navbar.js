@@ -100,7 +100,7 @@ class  Navbar extends Component{
 
     <div className="text-center mx-5 ">
       <div className=" card bg mt-5 d-flex  justify-content-center align-self-center width p-5">
-      <h4 className="mx-auto my-auto">Registration form</h4>
+      <h4 className="mx-auto mt-0 mb-2">Registration form</h4>
       {error && error.data && error.data.message  ? 
          <ErrorAlertNotification errors={error.data.message} onClick={this.handleDelete} /> : ""}
   <Register  formSubmit={this.registerSubmit}/>

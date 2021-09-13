@@ -81,3 +81,9 @@ margin: 20px 0 20px 0
     margin-bottom:10px
 
 }
+.font{
+    font-style:italic;
+    font-size:10px;
+    color:red;
+   margin-top:none
+}

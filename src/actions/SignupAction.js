@@ -1,18 +1,17 @@
-import dotenv from 'dotenv'
-import {CREATE_USER, CREATE_USER_FAIL, LOGOUT_USER,  DELETE_ERROR_MESSAGE} from './type';
+import {SET_CURRENT_USER, SIGN_UP_ERROR,  DELETE_ERROR_MESSAGE} from './type';
 import TutorialDataService from '../services/service';
 import jwt from 'jsonwebtoken';
 import toastr from 'toastr'
-require('dotenv').config();
 
-export const createUser=(data)=>({
-    type:CREATE_USER,
-      data
+
+export const setCurrentUser=(user)=>({
+    type:SET_CURRENT_USER,
+      user
     
 })
 
-export const createUserFail=(error)=>({
-    type:CREATE_USER_FAIL,
+export const signUpError=(error)=>({
+    type:SIGN_UP_ERROR,
       error
     
 })
@@ -22,19 +21,20 @@ export const deleteErrorMessage=()=>({
     
 })
 
-export const registerUser=(data)=> (dispatch)=>{
+export const registerUser=(user)=> (dispatch)=>{
 
-return TutorialDataService.create(data)
-.then(res=>{
-   
+return TutorialDataService.create(user)
+.then(res=>{ 
 const {message}= res.data;
+const{token}=res.data.user;
+localStorage.setItem("access-token", token);
 toastr.success(message);
-dispatch(createUser(data));
+dispatch(setCurrentUser(jwt.decode(token)));
 
 return true
     
 }).catch(error=>{  
-    dispatch(createUserFail(error.response))   
+    dispatch(signUpError(error.response))   
  
  })
        
@@ -42,13 +42,3 @@ return true
 }
 
 
-export const logout=()=>({
-    type: LOGOUT_USER
-})
-
-export const logoutUser=()=>(dispatch)=>{
-    localStorage.removeItem('user-token')
-    dispatch(logout({}))
-
-
-}

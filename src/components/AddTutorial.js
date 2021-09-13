@@ -39,9 +39,11 @@ class AddTutorial extends Component{
             this.setState({errors:{}, isLoading:true})           
         const{Tutorial, history}=this.props;
          Tutorial(this.state)
-        .then(()=>{
+        .then((res)=>{
+           if(res && res.status=== 200){
         this.setState({isLoading:false, isSubmitted: true})
          history.push('/tutorials')
+         }
             
         })
     }    
@@ -57,9 +59,9 @@ class AddTutorial extends Component{
     
     handleDelete=()=>{
         const {deleteErrorMessage}=this.props;
-        deleteErrorMessage();
-
+        deleteErrorMessage()
     }
+      
    
     render(){
         const{ title, description, isLoading, errors, isSubmitted}=this.state;
@@ -95,14 +97,16 @@ class AddTutorial extends Component{
                     
                          <div className="form-group">
                             <label className="input">Description</label>
-                            <TextField type="text" 
-                            error={errors.description}
+                            <textarea type="text" 
+                           
                             className="form-control"
                              id="description"
                               value={description} 
                              onChange={this.handleChange}
-                            field="description"/>               
+                            name="description"> 
+                            </textarea>              
                         </div>
+                        <p className="text-center font">{errors.description}</p>
                         
                         <div className="submit-button">
                         <button id="submit"onClick={this.onTutorialSubmit} className="btn btn-success">Submit</button>
@@ -118,6 +122,7 @@ class AddTutorial extends Component{
 
 const mapStateToProps=(state)=>{
     return{
+        
         error:state.tutorial.error
 
     }

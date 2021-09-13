@@ -72,6 +72,7 @@ class Register extends Component{
 
  render(){
     const{fullname ,email, password, password_confirmation, errors, isLoading}=this.state
+    console.log(this.state)
 
 
 
@@ -110,9 +111,10 @@ if(isLoading){
         
         <div className="form-group">
             <label className="input">Password</label>
-            <TextField
+            <TextField            
             error={errors.password}
              type="password"
+             autocomplete="password"
              className="form-control"
               id="password"
              value={password} 
@@ -149,7 +151,7 @@ if(isLoading){
 
 const mapDispatchToProps=(dispatch)=>{
     return{
-        signUp:(data)=>dispatch(registerUser(data)),
+        signUp:(user)=>dispatch(registerUser(user)),
         deleteErrorMessage:()=>dispatch(deleteErrorMessage())
     }
 }

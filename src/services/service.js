@@ -23,8 +23,8 @@ class TutorialDataService{
     findByTitle(title){
         return http.get(`/tutorials?title=${title}`)
     }
-    create(data){
-        return http.post("/user/register", data)
+    create(user){
+        return http.post("/user/register", user)
     }
     login(user){
         return http.post("/user/login", user)

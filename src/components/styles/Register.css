@@ -7,63 +7,6 @@
 }
 
 
-/* 
- .input{
-    display:flex;
-    justify-content:center;   
-    font-size:18px
-}
-
-.form-background{
-    background-color:rgb(228, 225, 225);
-    border: .5px solid #ccc;
-   display:flex;
-   justify-content:center;
-   align-items:center;
-   margin: 2px 0px 0px 350px;
-   width:auto
-
-}
-.form-style{
-    margin-top:5px;
- 
- height:7%;
-    max-width:75%;
-   
-}
-
-   
-#submit{  
-padding:7px 30px;
-font-size:18px
-
-}
-
-
-
-.form-control{   
-    text-align:center;
-    font-size:18px
-
-}
-
-    
-.form-group{
-   
-    margin-bottom:none;
-    font-size:25px
-}
-
-.register-form{
-    text-align:center;
-    margin-top:3px;
-    font-style:italic;
-    font-weight:bold;
-    font-size:27px;
-    margin-bottom:10px
-
-}  */
-
 
 .submit-button{
     display:flex;
