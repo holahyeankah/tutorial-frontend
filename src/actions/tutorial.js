@@ -1,39 +1,15 @@
-import {CREATE_TUTORIAL, CREATE_TUTORIAL_FAIL,  RETRIEVE_TUTORIAL_FAIL, RETRIEVE_ONE_TUTORIAL, RETRIEVE_ONE_TUTORIAL_FAIL,
+import { RETRIEVE_TUTORIAL_FAIL, RETRIEVE_ONE_TUTORIAL, RETRIEVE_ONE_TUTORIAL_FAIL,
 RETRIEVE_TUTORIAL, UPDATE_TUTORIAL, UPDATE_TUTORIAL_FAIL, DELETE_ERROR_MESSAGE, DELETE_TUTORIAL, DELETE_TUTORIAL_FAIL} from './type';
 import  TutorialDataService from '../services/service';
 import toastr from 'toastr';
+import axios from 'axios'
 
-export const createTutorial=(tutorial)=>({
-    type: CREATE_TUTORIAL,
-    tutorial
-})
- export const createTutorialFail=(error)=>({
-     type: CREATE_TUTORIAL_FAIL,
-     error
- });
 
  export const deleteErrorMessage=()=>({
     type:DELETE_ERROR_MESSAGE,
           
 })
 
- 
-export const Tutorial =(tutorial)=> (dispatch)=>{
-        return TutorialDataService.post(tutorial)
-        .then(res=>{
-           const {message}= res.data            
-               dispatch(createTutorial(tutorial));
-                 toastr.success(message);
-               
-               return res
-                   
-               }).catch(error=>{  
-                   
-                   dispatch(createTutorialFail(error.response))   
-                
-                })                    
-                     
-               }
  
 
 export const retrieveTutorial =()=> (dispatch)=>{

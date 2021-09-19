@@ -5,7 +5,7 @@ export const logoutUser=()=>({
 })
 
 export const logoutCurrentUser=()=>(dispatch)=>{
-    localStorage.removeItem("access-token")
+    localStorage.removeItem("secret")
     dispatch(logoutUser({}))
 }
 

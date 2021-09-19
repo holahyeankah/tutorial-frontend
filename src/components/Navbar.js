@@ -8,6 +8,7 @@ import {deleteErrorMessage} from '../actions/SignupAction';
 import {logoutCurrentUser} from '../actions/LogoutAction'
 import Login from './Login';
 import './styles/Navbar.css'
+import { retrieveTutorial} from '../actions/tutorial'
 
 
 
@@ -16,10 +17,14 @@ class  Navbar extends Component{
         super(props);
         this.state={
           register:false,
-          login:false
+          login:false,
+         update:false,
+         value: ""
         
     }
   }
+  
+
 
   showRegisterModal=()=>{
     this.setState({register:true})
@@ -29,7 +34,6 @@ class  Navbar extends Component{
     this.setState({login:true})
   }
 
- 
 
   registerSubmit=()=>{
     this.setState({register:false})
@@ -58,9 +62,9 @@ class  Navbar extends Component{
 
     render(){
     const {register, login}=this.state;
-    const{error, auth}=this.props; 
+    const{error, auth}=this.props;
 
-      
+     
         return(
           <div>
           
@@ -76,12 +80,12 @@ class  Navbar extends Component{
      <div className="bg-dark text-white px-4 fs-5" onClick={this.showLoginModal}>Login</div> 
   </div>
         
-         ) :(<div className="d-flex navbar navbar-expand  justify-content-between bg-dark ">
-         <Link to={"/tutorials"} className=" text-white fs-5 px-4  text-decoration-none" >
-            Home
-         </Link>
+     ) :(<div className="d-flex navbar navbar-expand  justify-content-between bg-dark ">
+     <Link to={"/tutorials"} className=" text-white fs-5 px-4  text-decoration-none" >
+       Home
+      </Link>
        
-          <div className="bg-dark fs-5 px-4 text-white"  onClick={this.logout}>Logout</div> 
+   <div className="bg-dark fs-5 px-4 text-white"  onClick={this.logout}>Logout</div> 
        </div>)
        
        }
@@ -129,7 +133,7 @@ class  Navbar extends Component{
       <h4 className="mx-auto mb-3">Login form</h4>
       {error && error.data && error.data.message  ? 
          <ErrorAlertNotification errors={error.data.message} onClick={this.handleDelete} /> : ""}
-  <Login  formSubmit={this.loginSubmit}/>
+  <Login  loginForm={this.loginSubmit}/>
   </div>
   </div>
   </div>
@@ -155,4 +159,4 @@ const mapStateToProps=(state)=>{
   }
 }
 
-export default connect(mapStateToProps, {deleteErrorMessage, logoutCurrentUser}) (Navbar)
+export default connect(mapStateToProps, {deleteErrorMessage, logoutCurrentUser, retrieveTutorial}) (Navbar)

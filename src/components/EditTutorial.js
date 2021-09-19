@@ -10,14 +10,14 @@ class Edit extends Component{
     constructor(props){
         super(props);
         this.state={
-         
-                id:'',
-                title:'',
-                description:'',
-                published:false,
-                isLoading:true,
-                message:'',
-                errorMsg:''      
+            id:'',
+            title:'',
+            description:'',
+            published:false,
+            isLoading:true,
+            message:'',
+            errorMsg:''       
+                      
     }
     }
 
@@ -37,9 +37,9 @@ class Edit extends Component{
     
     getTutorial=(id)=>{
      this.props.findOneTutorial(id)
-        .then(response=>{
-            const {id, title, description,published}=response.data.tutorial
-            this.setState({id,title, description,published})
+     .then(response=>{
+     const {id, title, description,published}=response.data.tutorial
+     this.setState({id,title, description,published})
 
         }).catch(err=>{
             this.setState({ErrorMsg:err})

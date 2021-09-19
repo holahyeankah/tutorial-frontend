@@ -26,10 +26,10 @@ export const loginUser=(user)=> (dispatch)=>{
  return TutorialDataService.login(user)
  .then(res=>{
     const {message}= res.data;
-    const {token}= res.data.user;
-     localStorage.setItem("access-token", token);
-     toastr.success(message);
+    const {token}= res.data;
      dispatch(setCurrentUser(jwt.decode(token)));
+     localStorage.setItem("secret", token);
+     toastr.success(message);
      return true
             
         }).catch(error=>{  

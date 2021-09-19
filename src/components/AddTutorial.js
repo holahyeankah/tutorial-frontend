@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Tutorial} from '../actions/tutorial';
 import {deleteErrorMessage} from  '../actions/LoginAction';
 import ErrorAlertNotification from './common/ErrorAlert'
 import TutorialValidation from '../Validations/TutorialValidation';
 import './styles/AddTutorial.css';
 import TextField from './common/TextField'
 import Loading from  './common/Loading'
+import axios from 'axios';
 
 class AddTutorial extends Component{
+    token =localStorage.getItem("secret")
     constructor(props){
         super(props);
         this.state={
@@ -21,6 +22,29 @@ class AddTutorial extends Component{
         }
     }
 
+
+    addTutorial=(e)=>{
+        e.preventDefault()
+         const{title, description, published, isLoading} = this.state;
+       const data={title, description, published, isLoading}
+       if(this.isValid()){
+         this.setState({errors:{}, isLoading:true})   
+         axios.post(`https://tutoriaal.herokuapp.com/tutorial/post`, data,{
+            headers:{
+          "Content-Type":"application/json", "Authorization":`Bearer ${this.token}`
+            },
+
+        })
+           .then(res=>{
+          this.setState({isLoading:false})
+          if(res && res.status ===200){
+              this.props.history.push("/tutorials")
+          }
+           })
+        }
+
+        
+    }
   
     handleChange=(e)=>{
         const{errors}=this.state;
@@ -33,22 +57,6 @@ class AddTutorial extends Component{
        }
     }
 
-    onTutorialSubmit=(e)=>{
-        e.preventDefault();
-        if(this.isValid()){
-            this.setState({errors:{}, isLoading:true})           
-        const{Tutorial, history}=this.props;
-         Tutorial(this.state)
-        .then((res)=>{
-           if(res && res.status=== 200){
-        this.setState({isLoading:false, isSubmitted: true})
-         history.push('/tutorials')
-         }
-            
-        })
-    }    
-
-    }
     isValid=()=>{
         const{errors, isValid}=TutorialValidation.InputValidation(this.state)
         if(!isValid){
@@ -109,7 +117,7 @@ class AddTutorial extends Component{
                         <p className="text-center font">{errors.description}</p>
                         
                         <div className="submit-button">
-                        <button id="submit"onClick={this.onTutorialSubmit} className="btn btn-success">Submit</button>
+                        <button id="submit"onClick={this.addTutorial} className="btn btn-success">Submit</button>
                         </div>  
                         </div>  
                 
@@ -129,4 +137,4 @@ const mapStateToProps=(state)=>{
 
 }
 
-export default connect(mapStateToProps, {Tutorial, deleteErrorMessage})(AddTutorial)
+export default connect(mapStateToProps, { deleteErrorMessage})(AddTutorial)

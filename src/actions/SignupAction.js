@@ -26,8 +26,8 @@ export const registerUser=(user)=> (dispatch)=>{
 return TutorialDataService.create(user)
 .then(res=>{ 
 const {message}= res.data;
-const{token}=res.data.user;
-localStorage.setItem("access-token", token);
+const{token}=res.data;
+localStorage.setItem("secret", token);
 toastr.success(message);
 dispatch(setCurrentUser(jwt.decode(token)));
 

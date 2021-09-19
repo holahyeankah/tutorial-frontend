@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {registerUser, deleteErrorMessage} from '../actions/SignupAction';
 import TextField from './common/TextField'
 import './styles/Register.css';
-import Loading from  './common/Loading'
+
 
 class Register extends Component{
   constructor(props){
@@ -32,8 +32,7 @@ class Register extends Component{
     this.setState({isLoading:false,})
     if(data){
     formSubmit()
-    
-
+  
     }
        
    })
@@ -67,18 +66,10 @@ class Register extends Component{
          })
      }
   }
- 
- 
 
  render(){
     const{fullname ,email, password, password_confirmation, errors, isLoading}=this.state
     console.log(this.state)
-
-
-
-if(isLoading){
-    return <Loading/>
-}
 
      
   return (

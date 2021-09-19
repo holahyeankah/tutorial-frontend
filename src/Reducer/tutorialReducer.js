@@ -1,4 +1,4 @@
-import {CREATE_TUTORIAL,CREATE_TUTORIAL_FAIL, RETRIEVE_TUTORIAL, RETRIEVE_TUTORIAL_FAIL, RETRIEVE_ONE_TUTORIAL, RETRIEVE_ONE_TUTORIAL_FAIL,UPDATE_TUTORIAL,
+import {RETRIEVE_TUTORIAL, RETRIEVE_TUTORIAL_FAIL, RETRIEVE_ONE_TUTORIAL, RETRIEVE_ONE_TUTORIAL_FAIL,UPDATE_TUTORIAL,
 UPDATE_TUTORIAL_FAIL, DELETE_TUTORIAL,DELETE_TUTORIAL_FAIL, DELETE_ALL_TUTORIAL, DELETE_ERROR_MESSAGE} from '../actions/type';
  
 const initialState={
@@ -8,14 +8,7 @@ const initialState={
 export const tutorialReducer=(state=initialState, action)=>{
     const {type, error, payload}=action
     switch(type){
-        case CREATE_TUTORIAL:
-            return {...state, payload};
-
-            case CREATE_TUTORIAL_FAIL:
-                 return {
-                     ...state,
-                     error
-                 }
+       
             case RETRIEVE_TUTORIAL:
                 return {
                     ...state,

@@ -3,7 +3,7 @@ import {logoutCurrentUser} from '../../actions/LogoutAction';
 import jwt from 'jsonwebtoken'
 
 const configureStore=(store)=>{
-    const token=localStorage.getItem("access-token")
+    const token=localStorage.getItem("secret")
 
     if(token){
         const DecodedToken=jwt.decode(token)

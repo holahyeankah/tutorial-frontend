@@ -8,9 +8,7 @@ class TutorialDataService{
     get(id){
         return http.get(`/tutorial/${id}`)
     }
-    post(tutorial){
-        return http.post("/tutorial/post", tutorial)
-    }
+ 
     update(id, data){
         return http.put(`/tutorial/${id}`, data)
     }
@@ -35,8 +33,6 @@ class TutorialDataService{
     updateProfile(id, profileData){
         return http.put(`/profile/${id}`, profileData)
     }
-    getCountries(){
-        return http.get("/countries")
-    }
+   
 }
 export default new TutorialDataService ()

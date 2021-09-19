@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {loginUser} from '../actions/LoginAction';
 import TextField from './common/TextField'
 import './styles/Login.css';
-import Loading from  './common/Loading'
+import {Redirect} from 'react-router-dom'
 
 class Login extends Component{
   constructor(props){
@@ -23,14 +23,15 @@ class Login extends Component{
    event.preventDefault();
    if(this.isValid()){
     this.setState({errors:{}, isLoading:true})  
-   const{login, history,formSubmit}=this.props;
+   const{login, loginForm}=this.props;
    login(this.state)
-   .then((user)=>{
-    this.setState({isLoading:false}) 
+   .then((user)=>{ 
+ this.setState({isLoading:false})
     if(user){
-        formSubmit()
+    loginForm()
 
     }
+    return null
        
    })
 }
@@ -61,23 +62,15 @@ class Login extends Component{
      }
   }
 
- 
 
  render(){
     const{email, password,errors, isLoading}=this.state
 
 
-
-if(isLoading){
-    return <Loading/>
-}
-
-     
+    
   return (
-     
-
     <div>
-        
+    
        <div className="form-group">
             <label className="email">Email</label>
             <TextField
